@@ -4,6 +4,11 @@
     name: "*"
     state: latest
 
+- name: install required os packages
+  yum:
+    name: "{{ os_packages }}"
+    state: present
+
 - name: start service firewalld
   systemd:
     state: started

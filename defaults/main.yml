@@ -1,4 +1,9 @@
 ---
+# Required OS and python packages
+os_packages:
+   - net-tools
+   - firewalld
+
 # etcd ports
 etcd_connection_port: 2379
 etcd_raft_port: 2380
