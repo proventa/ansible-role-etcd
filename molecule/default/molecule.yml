@@ -3,9 +3,10 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  yamllint .
-  ansible-lint
+lint:
+  name: yamllint
+  options:
+    config-file: molecule/default/yaml-lint.yml
 platforms:
   - name: instance
     image: "geerlingguy/docker-${MOLECULE_DISTRO:-centos7}-ansible:latest"

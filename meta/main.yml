@@ -17,7 +17,7 @@ galaxy_info:
         - 3.4.7
   galaxy_tags:
     - etcd
-    - postgres-ha
+    - postgres_ha
     - patroni
     - kubernetes
-    - key-value-store
+    - key_value_store
