@@ -1,0 +1,23 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: etcd
+  description: Deploying etcd key-value-store
+  author: yanehi
+  company: ""
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.5.1
+  platforms:
+    - name: centos
+      versions:
+        - 7
+    - name: etcd
+      versions:
+        - 3.4.7
+  galaxy_tags:
+    - etcd
+    - postgres-ha
+    - patroni
+    - kubernetes
+    - key-value-store

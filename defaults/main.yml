@@ -1,0 +1,27 @@
+---
+# etcd ports
+etcd_connection_port: 2379
+etcd_raft_port: 2380
+
+# version
+etcd_version: 3.4.7
+
+# etcd hosts
+etcd0_ip: 192.168.56.150
+etcd1_ip: 192.168.56.151
+etcd2_ip: 192.168.56.152
+etcd_name: etcd0
+
+# etcd directories
+etcd_home: /var/lib/etcd
+etcd_conf: /etc/etcd
+etcd_tmp: /tmp/etcd
+etcd_bin: /usr/local/bin
+
+# etcd user
+etcd_user: etcd
+etcd_user_password: etcd
+etcd_group: etcd
+
+# etcd files
+etcd_url: https://github.com/etcd-io/etcd/releases/download/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz

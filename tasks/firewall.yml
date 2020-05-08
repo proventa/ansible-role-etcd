@@ -1,0 +1,24 @@
+---
+- name: tcp port for raft
+  firewalld:
+    port: "{{ etcd_raft_port }}/tcp"
+    permanent: yes
+    immediate: yes
+    zone: public
+    state: enabled
+
+- name: udp port for etcd connection
+  firewalld:
+    port: "{{ etcd_connection_port }}/udp"
+    permanent: yes
+    immediate: yes
+    zone: public
+    state: enabled
+
+- name: udp port for etcd connection
+  firewalld:
+    port: "{{ etcd_connection_port }}/tcp"
+    permanent: yes
+    immediate: yes
+    zone: public
+    state: enabled

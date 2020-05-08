@@ -1,0 +1,4 @@
+---
+- hosts: etcd-servers
+  roles:
+    - ansible-role-etcd

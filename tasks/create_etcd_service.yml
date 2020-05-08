@@ -1,0 +1,31 @@
+---
+- name: etcd service file
+  shell: |
+    cat <<EOF | sudo tee /etc/systemd/system/etcd.service
+    [Unit]
+    Description=etcd service
+    Documentation=https://github.com/etcd-io/etcd
+
+    [Service]
+    Type=notify
+    User=etcd
+    ExecStart=/usr/local/bin/etcd \\
+      --name $HOSTNAME \\
+      --enable-v2=true \\
+      --data-dir=/var/lib/etcd \\
+      --initial-advertise-peer-urls http://$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ etcd_raft_port }} \\
+      --listen-peer-urls http://$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):{{ etcd_raft_port }} \\
+      --listen-client-urls http://$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):2379,http://127.0.0.1:2379 \\
+      --advertise-client-urls http://$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):2379 \\
+      --initial-cluster-token etcd-cluster-0 \\
+      --initial-cluster etcd0=http://{{ etcd0_ip }}:{{ etcd_raft_port }},etcd1=http://{{ etcd1_ip }}:{{ etcd_raft_port }},etcd2=http://{{ etcd2_ip }}:{{ etcd_raft_port }} \\
+      --initial-cluster-state new \
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+  args:
+      executable: /bin/bash
+
+- name: reload daemon
+  command: systemctl daemon-reload

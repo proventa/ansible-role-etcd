@@ -1,0 +1,14 @@
+---
+- name: Prepare OS
+  block:
+    - import_tasks: update_os.yml
+    - import_tasks: firewall.yml
+    - import_tasks: create_etcd_service.yml
+
+- name: Create directories und etcd user
+  block:
+    - import_tasks: create_directories.yml
+
+- name: Install etcd
+  block:
+    - import_tasks: etcd_install.yml

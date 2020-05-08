@@ -1,0 +1,34 @@
+---
+- name: Ensure group "{{ etcd_group }}" exists
+  group:
+    name: "{{ etcd_group }}"
+    state: present
+
+- name: Add the etcd user 'etcd'
+  user:
+    name: "{{ etcd_user }}"
+    password: "{{ etcd_user_password }}"
+    shell: /sbin/nologin
+    group: "{{ etcd_group }}"
+    append: yes
+
+- name: tmp directory for etcd zip file
+  file:
+    path: "{{ etcd_tmp }}"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_user }}"
+    state: directory
+
+- name: home directory for etcd
+  file:
+    path: "{{ etcd_home }}"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_user }}"
+    state: directory
+
+- name: conf directory for etcd
+  file:
+    path: "{{ etcd_conf }}"
+    owner: "{{ etcd_user }}"
+    group: "{{ etcd_user }}"
+    state: directory

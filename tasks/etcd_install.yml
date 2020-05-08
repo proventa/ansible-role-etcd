@@ -1,0 +1,29 @@
+---
+- name: download etcd release {{ etcd_version }}
+  get_url:
+    url: "{{ etcd_url }}"
+    dest: "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+
+- name: Extract etcd-v{{ etcd_version }}-linux-amd64
+  unarchive:
+    src: "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+    dest: "{{ etcd_tmp }}"
+    remote_src: yes
+
+# - name: Check if etcd file exists
+#   stat:
+#     path: "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64/etcd"
+#   register: etcd_stat
+
+- name: Move etcd to bin directory
+  command: mv "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64/etcd" "{{ etcd_bin }}/etcd"
+#  when: etcd_stat.exists
+
+# - name: Check if etcdctl file exists
+#   stat:
+#     path: "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64/etcdctl"
+#   register: etcdctl_stat
+
+- name: Move etcdctl to {{ etcd_bin }}
+  command: mv "{{ etcd_tmp }}/etcd-v{{ etcd_version }}-linux-amd64/etcdctl" "{{ etcd_bin }}/etcdctl"
+ # when: etcdctl_stat.exists

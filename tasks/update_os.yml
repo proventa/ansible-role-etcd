@@ -1,0 +1,26 @@
+---
+- name: upgrade all packages
+  yum:
+    name: "*"
+    state: latest
+
+- name: start service firewalld
+  systemd:
+    state: started
+    name: firewalld
+
+- name: enable service firewalld
+  systemd:
+    name: firewalld
+    enabled: yes
+    masked: no
+
+- name: add etcd hosts to hosts file
+  shell: |
+    tee -a /etc/hosts<<EOF
+    {{ etcd0_ip }} etcd0 etcd0
+    {{ etcd1_ip }} etcd1 etcd1
+    {{ etcd2_ip }} etcd2 etcd2
+    EOF
+  args:
+    executable: /bin/bash
