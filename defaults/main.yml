@@ -1,4 +1,7 @@
 ---
+# version
+etcd_version: 3.4.7
+
 # Required OS and python packages
 os_packages:
    - net-tools
@@ -8,14 +11,15 @@ os_packages:
 etcd_connection_port: 2379
 etcd_raft_port: 2380
 
-# version
-etcd_version: 3.4.7
-
-# etcd hosts
+# etcd host ips
 etcd0_ip: 192.168.56.150
 etcd1_ip: 192.168.56.151
 etcd2_ip: 192.168.56.152
-etcd_name: etcd0
+
+# etcd host names
+etcd0_name: etcd0
+etcd1_name: etcd1
+etcd2_name: etcd2
 
 # etcd directories
 etcd_home: /var/lib/etcd
@@ -30,3 +34,9 @@ etcd_group: etcd
 
 # etcd files
 etcd_url: https://github.com/etcd-io/etcd/releases/download/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz
+
+
+# etcd service
+description: etcd service
+documentation: https://github.com/etcd-io/etcd
+type: notify

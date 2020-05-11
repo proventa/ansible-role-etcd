@@ -23,9 +23,9 @@
 - name: add etcd hosts to hosts file
   shell: |
     tee -a /etc/hosts<<EOF
-    {{ etcd0_ip }} etcd0 etcd0
-    {{ etcd1_ip }} etcd1 etcd1
-    {{ etcd2_ip }} etcd2 etcd2
+    {{ etcd0_ip }} {{ etcd0_name }} {{ etcd0_name }}
+    {{ etcd1_ip }} {{ etcd1_name }} {{ etcd1_name }}
+    {{ etcd2_ip }} {{ etcd2_name }} {{ etcd2_name }}
     EOF
   args:
     executable: /bin/bash
